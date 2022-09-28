@@ -20,7 +20,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/perguntas")
+@RequestMapping("/api")
 @Api(value = "API Rest Perguntas")
 @CrossOrigin(origins = "*")
 public class PerguntaController {
@@ -28,20 +28,20 @@ public class PerguntaController {
 	@Autowired
 	private PerguntaRepository perguntaRepository;
 	
-	@GetMapping
+	@GetMapping("/perguntas")
 	@ApiOperation(value = "Retorna lista de perguntas")
 	public List<Pergunta> findAll(){
 		return perguntaRepository.findAll();
 	}
 	
 	@ApiOperation(value = "Retorna perguntas por ID")
-	@GetMapping(value="/{id}")
+	@GetMapping(value="/perguntas/{id}")
 	public Optional<Pergunta> findById(@PathVariable("id") Long perguntaId) {
 		return perguntaRepository.findById(perguntaId);
 	}
 	
 	@ApiOperation(value = "Cria uma pergunta")
-	@PostMapping
+	@PostMapping("/perguntas")
 	public Pergunta adicionar(@RequestBody Pergunta pergunta) {
 
 		return perguntaRepository.save(pergunta);
@@ -49,7 +49,7 @@ public class PerguntaController {
 	}
 
 	@ApiOperation(value = "Deleta pergunta")
-	@DeleteMapping
+	@DeleteMapping("/perguntas")
 	public void deletarPersonagem(@RequestBody Pergunta personagem) {
 		perguntaRepository.delete(personagem);
 	}

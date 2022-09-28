@@ -1,4 +1,62 @@
+<!-- <mat-card *ngIf="perguntas$ | async as personagens; else loading">
+  <mat-card-title-group>
+    <mat-card-title>O que o rato roeu?</mat-card-title>
+    <mat-card-subtitle>Você sabe?</mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+    <ol>
+      <li>"As unhas da minha avó"</li>
+      <li>"A roupa do rei de Roma"</li>
+      <li>"A roupa da rainha Elizabete (in memorian)"</li>
+      <li>"A pipa do vovô"</li>
+    </ol>
+  </mat-card-content>
+</mat-card></div> -->
+<div *ngIf="perguntas$ | async as perguntas; else loading">
+  <table mat-table [dataSource]="perguntas" class="mat-elevation-z8 demo-table">
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let pergunta">{{ pergunta.perguntaId }}</td>
+    </ng-container>
 
-<mat-card>
-  <p>Oi</p>
-</mat-card>
+    <!-- Pergunta Column -->
+    <ng-container matColumnDef="titulo">
+      <th mat-header-cell *matHeaderCellDef>Título</th>
+      <td mat-cell *matCellDef="let pergunta">{{ pergunta.titulo }}</td>
+    </ng-container>
+
+    <!-- Botão Column -->
+    <ng-container matColumnDef="botao">
+      <th mat-header-cell *matHeaderCellDef>Expandir</th>
+      <td mat-cell *matCellDef="let pergunta">
+        <button
+          mat-mini-fab
+          color="accent"
+          aria-label="Example icon button with a menu icon"
+          mat-button
+          (click)="openDialog(pergunta.perguntaId)"
+        >
+          <mat-icon>info</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="clickedRows.add(row)"
+      [class.demo-row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
+</div>
+<ng-template #loading>
+  <mat-progress-spinner
+    class="example-margin"
+    [color]="color"
+    [mode]="mode"
+    [value]="value"
+  >
+  </mat-progress-spinner>
+</ng-template>
