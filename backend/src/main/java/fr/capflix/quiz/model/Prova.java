@@ -23,30 +23,19 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @Entity
-@Table(name = "perguntas")
-public class Pergunta implements Serializable {
+@Table(name = "provas")
+public class Prova implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long perguntaId;
+	private Long provaId;
 
 	@Column(nullable = false)
-	private String titulo;
+	private String assunto; // Posteriormente modificar pra enum
+	
+	@Column(nullable=false)
+	private Pergunta[] perguntas;
 
-	@Column(nullable = false)
-	private String alternativa1; // Posteriormente fazer um array de alternativas
-
-	@Column(nullable = false)
-	private String alternativa2;
-
-	@Column(nullable = false)
-	private String alternativa3;
-
-	@Column(nullable = false)
-	private String alternativa4;
-
-	@Column(nullable = false)
-	private String dificuldade;
 
 }
