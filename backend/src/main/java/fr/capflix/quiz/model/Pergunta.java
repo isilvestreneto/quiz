@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import fr.capflix.quiz.enums.DificuldadePergunta;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,6 +32,9 @@ public class Pergunta implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long perguntaId;
+	
+	@ManyToOne
+	private Prova prova;
 
 	@Column(nullable = false)
 	private String titulo;
@@ -47,6 +52,6 @@ public class Pergunta implements Serializable {
 	private String alternativa4;
 
 	@Column(nullable = false)
-	private String dificuldade;
+	private DificuldadePergunta dificuldade;
 
 }
