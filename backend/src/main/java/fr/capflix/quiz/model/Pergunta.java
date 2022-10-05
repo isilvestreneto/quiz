@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,6 +35,7 @@ public class Pergunta implements Serializable {
 	private Long perguntaId;
 	
 	@ManyToOne
+	@JoinColumn(name="prova_id", insertable = false, updatable = false)
 	private Prova prova;
 
 	@Column(nullable = false)
